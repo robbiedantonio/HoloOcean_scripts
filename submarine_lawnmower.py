@@ -20,7 +20,7 @@ binsR = config['RangeBins'] # Number of bins in each sonar chanel
 
 
 #### INITIALIZE SONAR PLOT PARAMETERS
-num_pings = 50  # Number of pings in simulation
+num_pings = 50  # Number of pings in simulation?
 
 #### GET PLOT READY
 plt.ion()       # Interactive mode
@@ -30,12 +30,18 @@ r = np.linspace(-maxR, maxR, binsR)
 R, T = np.meshgrid(r, t)
 data = np.zeros_like(R)
 
+plt.grid(False)
+plot = plt.pcolormesh(R, T, data, cmap='copper', shading='auto', vmin=0, vmax=1)
+plt.tight_layout()
+plt.gca().invert_yaxis()
+plt.gcf().canvas.flush_events()
+
 #### RUN SIMULATION
-num_timesteps = 1000    # Number of ticks in environment
+num_timesteps = 2    # Number of ticks in environment
 
 command = np.array([0,0,0,0,20])
 with holoocean.make(scenario) as env:
-    for i in range(1000):
+    for i in range(num_timesteps):
         env.act("auv0", command)
         state = env.tick()
 
@@ -43,7 +49,9 @@ with holoocean.make(scenario) as env:
             data = np.roll(data, 1, axis=0)
             data[0] = state['SidescanSonar']
 
-            plot.set_array(data.ravel())
+            print(data)
+
+            plt.set_array(data.ravel())
 
             plt.draw()
             plt.gcf().canvas.flush_events()
