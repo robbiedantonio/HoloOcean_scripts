@@ -50,7 +50,9 @@ with holoocean.make(scenario) as env:
             command = [0,45,0,0,20]
 
 
-        if(num_timesteps == 2000)
+        if(num_timesteps == 2000):
+            # Return fins to straight
+            command = [0,0,0,0,20]
 
         
 print("Finished Simulation!")
