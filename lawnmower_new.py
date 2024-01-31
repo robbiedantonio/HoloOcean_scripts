@@ -30,6 +30,7 @@ log_file = open('HoceanLog.txt', 'a')   # Set to only append
 
 #### RUN SIMULATION
 num_timesteps = 10000    # Number of ticks in environment
+data = np.zeros_like(R)
 
 with holoocean.make(scenario) as env:
     for i in range(num_timesteps):
