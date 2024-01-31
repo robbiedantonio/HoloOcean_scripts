@@ -30,6 +30,10 @@ log_file = open('HoceanLog.txt', 'a')   # Set to only append
 
 #### RUN SIMULATION
 num_timesteps = 10000    # Number of ticks in environment
+
+t = np.arange(0, num_pings)
+r = np.linspace(-maxR, maxR, binsR)
+R, T = np.meshgrid(r, t)
 data = np.zeros_like(R)
 
 with holoocean.make(scenario) as env:
