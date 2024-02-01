@@ -44,7 +44,8 @@ with holoocean.make(scenario) as env:
         if 'SidescanSonar' in state:
             data = np.roll(data, 1, axis=0)
             data[0] = state['SidescanSonar']
-            sonar_str = np.array2string(data[0])
+            # sonar_str = np.array2string(data[0])
+            sonar_str = np.array2string(data[0], precision=8, separator=', ', threshold=np.inf)
             log_file.write(sonar_str + '\n')
         '''
         CONTROL PLAN GOES HERE
