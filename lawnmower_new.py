@@ -1,5 +1,3 @@
-
-
 import holoocean
 import matplotlib.pyplot as plt
 import numpy as np
@@ -41,6 +39,11 @@ with holoocean.make(scenario) as env:
         env.act("auv0", command)
         state = env.tick()
 
+        # Get depth data from state         # Prob need to initialize this and other sensors up top
+        if 'DepthSensor' in state:
+            depth = state['DepthSensor']
+
+        # Get sonar data from state
         if 'SidescanSonar' in state:
             data = np.roll(data, 1, axis=0)
             data[0] = state['SidescanSonar']
