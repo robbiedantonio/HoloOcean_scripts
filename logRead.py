@@ -2,12 +2,11 @@
 
 import numpy as np
 
+with open('nav_agent_log.txt', 'r') as log_file:
+    lines = log_file.readlines()
 
-file = open('HoceanLog.txt', 'r')
+# Convert back to numpy array
+sidescan_sonar_array = np.array([list(map(float, line.strip().split(','))) for line in lines])
 
-
-for i, line in enumerate(file):
-	npstring = np.fromstring(line)
-	print(npstring)
-	if i == 3: 
-		break
+# Print or use the array as needed
+print(sidescan_sonar_array)
